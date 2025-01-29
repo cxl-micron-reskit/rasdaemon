@@ -12,6 +12,7 @@
 #include <unistd.h>
 
 #include "ras-cxl-handler.h"
+#include "ras-page-isolation.h"
 #include "ras-logger.h"
 #include "ras-record.h"
 #include "ras-report.h"
@@ -1053,7 +1054,7 @@ int ras_cxl_dram_event_handler(struct trace_seq *s,
 
 #ifdef HAVE_MEMORY_CE_PFA
 	/* Page offline for CE when threeshold is set */
-	if (!(ev.descriptor & CXL_GMER_EVT_DESC_UNCORECTABLE_EVENT) &&
+	if (!(ev.descriptor & CXL_GMER_EVT_DESC_UNCORRECTABLE_EVENT) &&
 	    (ev.descriptor & CXL_GMER_EVT_DESC_THRESHOLD_EVENT))
 		ras_hw_threshold_pageoffline(ev.hpa);
 #endif
